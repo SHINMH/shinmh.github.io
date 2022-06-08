@@ -2,6 +2,7 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
+    author: `SHINMH`,
     title: `Blog`,
     siteUrl: `https://www.shinmh.dev`,
     description: `SHINMH's Blog`
