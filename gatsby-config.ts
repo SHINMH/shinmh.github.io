@@ -14,7 +14,16 @@ const config: GatsbyConfig = {
   plugins: [
     `gatsby-plugin-emotion`,
     `gatsby-plugin-image`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaults: {
+          formats: ['auto', 'webp'],
+          quality: 100,
+          placeholder: 'blurred',
+        }
+      }
+    },
     `gatsby-transformer-sharp`, // Needed for dynamic images\
     `gatsby-plugin-react-helmet`,
     {
@@ -22,6 +31,13 @@ const config: GatsbyConfig = {
       options: {
         name: `contents`,
         path: `${__dirname}/contents`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/static`,
       },
     },
     {

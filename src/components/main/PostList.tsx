@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useMemo } from 'react'
 import styled from '@emotion/styled'
 import PostItem from 'components/main/PostItem'
 import { PostListItemType } from 'types/PostItem.types'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export type PostType = {
   node: {
@@ -12,13 +13,16 @@ export type PostType = {
       date: string
       categories: string[]
       thumbnail: {
-        publicURL: string
+        childImageSharp: {
+          gatsbyImageData: IGatsbyImageData
+        }
       }
     }
   }
 }
 
 type PostListProps = {
+  selectedCategory: string
   posts: PostListItemType[]
 }
 
@@ -37,10 +41,28 @@ const PostListWrapper = styled.div`
   }
 `
 
-const PostList: FunctionComponent<PostListProps> = function ({ posts }) {
+const PostList: FunctionComponent<PostListProps> = function ({
+  selectedCategory,
+  posts,
+}) {
+  const postListData = useMemo(
+    () =>
+      posts.filter(
+        ({
+          node: {
+            frontmatter: { categories },
+          },
+        }: PostListItemType) =>
+          selectedCategory !== 'All'
+            ? categories.includes(selectedCategory)
+            : true,
+      ),
+    [selectedCategory],
+  )
+
   return (
     <PostListWrapper>
-      {posts.map(({ node: { id, frontmatter } }: PostType) => (
+      {postListData.map(({ node: { id, frontmatter } }: PostListItemType) => (
         <PostItem {...frontmatter} link="https://www.google.co.kr/" key={id} />
       ))}
     </PostListWrapper>
