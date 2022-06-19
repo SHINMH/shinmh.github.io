@@ -39,7 +39,7 @@ const useInfiniteScroll = function (
     )
       return
 
-    let observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries, observer) => {
       if (!entries[0].isIntersecting) return
 
       setCount(value => value + 1)
