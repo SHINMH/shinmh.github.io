@@ -36,3 +36,59 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({ node, name: 'slug', value: slug });
   }
 };
+
+// Generate Post Page Through Markdown Data
+exports.createPages = async({ actions, graphql, reporter }) => {
+  const { createPage } = actions;
+
+  // Get All Markdown File For Paging
+  const queryAllMarkdownData = await graphql(
+    `
+      {
+        allMarkdownRemark(
+          sort: {
+            order: DESC
+            fields: [frontmatter___date, frontmatter___title]
+          }
+        ) {
+          edges {
+            node {
+              fields {
+                slug
+              }
+            }
+          }
+        }
+      }
+    `,
+  );
+
+  // 마크다운 불러올때 발생하는 error handling
+  if(queryAllMarkdownData.errors) {
+    reporter.panicOnBuild(`Error while running query`);
+    return;
+  }
+
+  // Import Post template Component
+  const PostTempateComponent = path.resolve(
+    __dirname,
+    'src/templates/post_template.tsx',
+  );
+
+  const generatePostPage = ({
+    node: {
+      fields: { slug },
+    },
+  }) => {
+    const pageOptions = {
+      path: slug,
+      component: PostTempateComponent,
+      context: { slug },
+    };
+
+    createPage(pageOptions);
+  };
+
+  // Generate Post Page And Passing Slug Props for Query
+  queryAllMarkdownData.data.allMarkdownRemark.edges.forEach(generatePostPage);
+};
