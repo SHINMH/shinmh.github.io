@@ -29,6 +29,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "gatsby": "^4.15.1",
+    "gatsby-plugin-advanced-sitemap": "^2.1.0",
     "gatsby-plugin-canonical-urls": "^4.17.0",
     "gatsby-plugin-emotion": "^7.15.0",
     "gatsby-plugin-image": "^2.15.1",
