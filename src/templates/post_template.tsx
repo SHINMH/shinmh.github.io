@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 import { PostPageItemType } from 'types/PostItem.types'
 import Template from 'components/common/Template'
 import PostHead from 'components/post/PostHead'
+import PostContent from 'components/post/PostContent'
+import CommentWidget from 'components/post/CommentWidget'
 
 type PostTemplateProps = {
   data: {
@@ -39,7 +41,9 @@ const PostTemplate: FunctionComponent<PostTemplateProps> = function ({
         date={date}
         categories={categories}
         thumbnail={gatsbyImageData}
-      ></PostHead>
+      />
+      <PostContent html={html} />
+      <CommentWidget />
     </Template>
   )
 }
