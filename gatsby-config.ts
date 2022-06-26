@@ -2,10 +2,10 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
+    title: `SHINMH's Blog`,
     author: `SHINMH`,
-    title: `Blog`,
     siteUrl: `https://www.shinmh.dev`,
-    description: `SHINMH's Blog`
+    description: `주니어 개발자로서 배우고, 학습한 것을 기록하는 SHINMH의 개발블로그입니다.`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -14,6 +14,9 @@ const config: GatsbyConfig = {
   plugins: [
     `gatsby-plugin-emotion`,
     `gatsby-plugin-image`,
+    'gatsby-plugin-sitemap',
+    `gatsby-transformer-sharp`, // Needed for dynamic images\
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
@@ -24,8 +27,6 @@ const config: GatsbyConfig = {
         }
       }
     },
-    `gatsby-transformer-sharp`, // Needed for dynamic images\
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -76,6 +77,19 @@ const config: GatsbyConfig = {
             },
           },
         ],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://shinmh.dev/',
+        stripQueryString: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/' }],
       },
     },
   ]
