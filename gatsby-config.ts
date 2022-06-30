@@ -21,7 +21,7 @@ const config: GatsbyConfig = {
       resolve: `gatsby-plugin-sharp`,
       options: {
         defaults: {
-          formats: ['auto', 'jpg'],
+          formats: ['auto', 'jpg', 'png'],
           quality: 100,
           placeholder: 'blurred',
         }
