@@ -1,0 +1,25 @@
+---
+title: "Post template"
+description: "Post template"
+date: "2024-08-26"
+update: "2024-08-26"
+tags:
+  - shinmh
+  - next
+series: "Post template"
+---
+# Next.js 소개
+
+Next.js는 React 기반의 **서버 사이드 렌더링(SSR)** 및 **정적 사이트 생성(SSG)** 기능을 제공하는 **React 프레임워크**입니다. Next.js는 SEO 최적화, 빠른 페이지 로딩 속도, 파일 기반 라우팅과 같은 다양한 기능을 제공하여 개발자들이 손쉽게 강력한 웹 애플리케이션을 구축할 수 있도록 돕습니다.
+
+## 주요 기능
+
+### 1. 파일 기반 라우팅
+
+Next.js는 파일 시스템을 기반으로 한 간단한 라우팅 시스템을 제공합니다. `pages` 디렉토리 내의 파일이 자동으로 라우트가 되어, 복잡한 설정 없이도 쉽게 페이지를 추가할 수 있습니다.
+
+```javascript
+// pages/index.js
+export default function Home() {
+  return <h1>홈 페이지</h1>;
+}
