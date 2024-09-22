@@ -4,11 +4,11 @@ import React from "react";
 import {Jersey_10} from 'next/font/google'
 import ScrollProgressBar from "@/components/ScrollProgressBar";
 
-export const jersey10 = Jersey_10({
+const jersey10 = Jersey_10({
     subsets: ['latin'], // 사용할 폰트 집합
     weight: ['400'], // 사용할 폰트 두께
     display: 'swap', // 폰트 다운로드 전까지 기본 폰트 표시(성능 최적화)
-    variable: '--font-Jersey' // 사용할 CSS 변수 이름
+    adjustFontFallback: false,
 })
 
 const Header = () => {

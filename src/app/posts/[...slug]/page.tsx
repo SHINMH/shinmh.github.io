@@ -5,8 +5,9 @@ import path from 'path';
 import {remark} from 'remark';
 import html from 'remark-html';
 import getPostMetadata from "@/utils/getPostMetadata";
+import {Post} from "@/config/types";
 
-async function getPostContent(slug: any) {
+async function getPostContent(slug: string) {
     const folder = "posts/";
 
     const filePath = Array.isArray(slug)
@@ -34,19 +35,15 @@ export const generateStaticParams = async () => {
     return posts.map((post) => ({slug: post.slug.split("/")}));
 };
 
-export async function generateMetadata({
-                                           params,
-                                       }: {
-    params: any;
-}) {
-    const id = params?.slug ? " ⋅ " + params?.slug : "";
-    return {
-        title: `${id.replaceAll("_", "")}`,
-    };
+export async function generateMetadata({ params }: { params: Post }) {
+  const id = params?.slug ? ' ⋅ ' + params?.slug : '';
+  return {
+    title: `${id.replaceAll('_', '')}`,
+  };
 }
 
-export default async function PostPage(props: any) {
-    const slug = props.params.slug;
+export default async function PostPage({ params }: { params: { slug: string } }) {
+    const slug = params.slug;
     const post = await getPostContent(slug);
 
     return (
