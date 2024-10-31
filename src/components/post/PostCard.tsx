@@ -20,7 +20,7 @@ export default function PostCard(props: { post: Post; key: number }) {
                 />
                 <div className="p-4">
                     <p className="mb-1 text-sm text-primary-500">
-                        Andrea Felsted • <time>{post.date}</time>
+                        Andrea Felsted • <time>{post.dateString}</time>
                     </p>
                     <h3 className="text-xl font-medium text-gray-900">{post.title}</h3>
                     <p className="mt-1 text-gray-500">{post.description}</p>
